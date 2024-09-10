@@ -1,0 +1,20 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="30dp"
+    android:viewportWidth="120"
+    android:viewportHeight="30"
+    android:autoMirrored="true">
+
+    <!-- Background rectangle with rounded corners -->
+    <path
+        android:fillColor="#FF1515"
+        android:pathData="M5,0 L115,0 A5,5 0 0 1 120,5 L120,25 A5,5 0 0 1 115,30 L5,30 A5,5 0 0 1 0,25 L0,5 A5,5 0 0 1 5,0 Z"
+        android:strokeColor="#00000000" />
+
+    <!-- Inner rectangle with stroke -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FF1515"
+        android:strokeWidth="1"
+        android:pathData="M6,2 L114,2 A4,4 0 0 1 118,6 L118,24 A4,4 0 0 1 114,28 L6,28 A4,4 0 0 1 2,24 L2,6 A4,4 0 0 1 6,2 Z" />
+</vector>

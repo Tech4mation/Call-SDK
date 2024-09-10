@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="callsViewModel"
+            type="com.nativetalk.call.activities.voip.viewmodels.CallsViewModel" />
+
+        <variable
+            name="controlsViewModel"
+            type="com.nativetalk.call.activities.voip.viewmodels.ControlsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/off_white">
+
+        <TextView
+            android:id="@+id/outgoing_call_title"
+            style="@style/call_header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/call_outgoing_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.483"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Chronometer
+            android:id="@+id/outgoing_call_timer"
+            style="@style/call_header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@id/outgoing_call_title" />
+
+<!--        <ImageView-->
+<!--            android:id="@+id/avatar"-->
+<!--            coilVoipContactAlt="@{callsViewModel.currentCallData}"-->
+<!--            android:layout_width="150dp"-->
+<!--            android:layout_height="150dp"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:contentDescription="@null"-->
+<!--            android:visibility="@{callsViewModel.currentCallData.isConferenceCall ? View.GONE : View.VISIBLE}"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHeight_max="@dimen/voip_contact_avatar_max_size"-->
+<!--            app:layout_constraintHorizontal_bias="0.498"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/outgoing_call_timer"-->
+<!--            app:layout_constraintVertical_chainStyle="packed"-->
+<!--            app:layout_constraintWidth_max="@dimen/voip_contact_avatar_max_size" />-->
+
+        <TextView
+            android:id="@+id/avatar"
+            android:gravity="center"
+            android:textSize="@dimen/header_texts_size"
+            android:text="@{callsViewModel.customerInitials}"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/fade_green"
+            android:contentDescription="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_max="@dimen/voip_contact_avatar_max_size"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/outgoing_call_timer"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintWidth_max="@dimen/voip_contact_avatar_max_size"
+            />
+
+
+        <TextView
+            android:id="@+id/callee_name"
+            style="@style/call_header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{callsViewModel.currentCallData.contact.name ?? callsViewModel.currentCallData.displayName, default=`Bilbo Baggins`}"
+            app:layout_constraintBottom_toTopOf="@id/buttons"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.485"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/avatar"
+            app:layout_constraintVertical_bias="0.193" />
+
+        <include
+            android:id="@+id/buttons"
+            layout="@layout/voip_buttons_outgoing"
+            android:layout_width="0dp"
+            android:layout_height="350dp"
+            android:layout_margin="10dp"
+            app:callsViewModel="@{callsViewModel}"
+            app:controlsViewModel="@{controlsViewModel}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_max="@dimen/voip_buttons_max_width" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

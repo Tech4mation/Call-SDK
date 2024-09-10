@@ -1,0 +1,24 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="40dp"
+    android:height="40dp"
+    android:viewportWidth="40"
+    android:viewportHeight="40">
+
+  <!-- Circular background -->
+  <path
+      android:pathData="M20,20m-20,0a20,20 0,1 1,40 0a20,20 0,1 1,-40 0"
+      android:fillColor="#E7F7E1" />
+
+  <!-- Profile outline -->
+  <path
+      android:pathData="M20,12
+                         c-4,0 -6,3 -6,6
+                         s2,6 6,6
+                         s6,-3 6,-6
+                         s-2,-6 -6,-6
+                         z
+                         M13,24
+                         c0,5 7,5 14,0"
+      android:strokeColor="#4CAF50"
+      android:strokeWidth="1.5"/>
+</vector>

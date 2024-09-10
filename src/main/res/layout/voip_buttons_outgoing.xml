@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="callsViewModel"
+            type="com.nativetalk.call.activities.voip.viewmodels.CallsViewModel" />
+
+        <variable
+            name="controlsViewModel"
+            type="com.nativetalk.call.activities.voip.viewmodels.ControlsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/buttons_layout"
+        android:layout_width="match_parent"
+        android:layout_height="350dp">
+
+        <ImageView
+            android:id="@+id/microphone"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/nativetalk_control_button_size"
+            android:contentDescription="@{callsViewModel.isMicrophoneMuted ? @string/content_description_disable_mic_mute : @string/content_description_enable_mic_mute}"
+            android:enabled="@{callsViewModel.isMuteMicrophoneEnabled}"
+            android:onClick="@{() -> callsViewModel.toggleMuteMicrophone()}"
+            android:padding="5dp"
+            android:selected="@{callsViewModel.isMicrophoneMuted}"
+            android:src="@drawable/nativetalk_call_mute"
+            app:layout_constraintDimensionRatio="W,1:1"
+            app:layout_constraintEnd_toStartOf="@+id/pause_call"
+            app:layout_constraintHorizontal_bias="0.071"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/speaker"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/nativetalk_control_button_size"
+            android:contentDescription="@{controlsViewModel.isSpeakerSelected ? @string/content_description_disable_speaker : @string/content_description_enable_speaker}"
+            android:onClick="@{() -> controlsViewModel.toggleSpeaker()}"
+            android:padding="5dp"
+            android:selected="@{controlsViewModel.isSpeakerSelected}"
+            android:src="@drawable/nativetalk_call_speaker"
+            android:visibility="@{controlsViewModel.audioRoutesEnabled ? View.GONE : View.VISIBLE}"
+            app:layout_constraintDimensionRatio="W,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.909"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toEndOf="@id/pause_call"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/pause_call"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/nativetalk_control_button_size"
+            android:contentDescription="@string/content_description_pause_call"
+            android:enabled="@{callsViewModel.currentCallData.isPaused || callsViewModel.currentCallData.canBePaused}"
+            android:onClick="@{() -> callsViewModel.currentCallData.togglePause()}"
+            android:padding="5dp"
+            android:selected="@{callsViewModel.currentCallData.isPaused}"
+            android:src="@drawable/nativetalk_call_hold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintDimensionRatio="W,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/hangup"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="130dp"
+            android:contentDescription="@string/content_description_terminate_call"
+            android:onClick="@{() -> controlsViewModel.hangUp()}"
+            android:padding="0dp"
+            android:src="@drawable/nativetalk_dial_endcall"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="W,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

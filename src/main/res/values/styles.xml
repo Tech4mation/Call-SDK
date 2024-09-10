@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="BaseAppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Disable animations between activities -->
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowBackground">@color/transparent_color</item>
+
+        <!-- Android theme override -->
+        <item name="android:scrollbarThumbVertical">@color/light_grey_color</item>
+        <item name="colorAccent">@color/primary_color</item>
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="android:colorPrimary">@color/primary_color</item>
+        <!-- Comment out the following line to disable system's status bar coloring -->
+        <item name="android:colorPrimaryDark">@color/primary_dark_color</item>
+    </style>
+
+    <style name="AppTheme" parent="BaseAppTheme" />
+
+    <style name="call_header_title" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="call_dtmf_history_font" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/white_color</item>
+        <item name="android:textSize">35sp</item>
+    </style>
+
+    <style name="call_numpad_digit" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@android:color/transparent</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:background">@drawable/button_call_numpad_background</item>
+    </style>
+
+    <style name="nativetalk_call_header_title" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textSize">@dimen/regular_texts_size</item>
+    </style>
+</resources>

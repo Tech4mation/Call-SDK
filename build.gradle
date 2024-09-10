@@ -1,0 +1,133 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'org.jlleitschuh.gradle.ktlint'
+    id 'com.google.firebase.crashlytics'
+    id 'maven-publish'
+}
+
+android {
+    namespace 'com.nativetalk.call'
+    compileSdk 33
+
+
+    defaultConfig {
+        minSdk 23
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+    buildFeatures {
+        dataBinding = true
+        viewBinding true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    //From old project
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.work:work-runtime-ktx:2.8.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    def lifecycle_version = "2.6.1"
+
+    implementation 'androidx.appcompat:appcompat:1.6.0-rc01'
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.core:core-splashscreen:1.0.1'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation 'androidx.media:media:1.6.0'
+    implementation "androidx.security:security-crypto-ktx:1.1.0-alpha03"
+    implementation "androidx.window:window:1.0.0"
+    implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
+    implementation 'androidx.activity:activity-compose:1.3.1'
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
+//    implementation 'androidx.core:core-ktx:+'
+
+    def nav_version = "2.5.2"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    implementation "androidx.slidingpanelayout:slidingpanelayout:1.2.0"
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation "androidx.gridlayout:gridlayout:1.0.0"
+    implementation 'androidx.recyclerview:recyclerview:1.3.0-beta02'
+
+    // https://github.com/material-components/material-components-android/blob/master/LICENSE Apache v2.0
+    implementation 'com.google.android.material:material:1.6.1'
+    // https://github.com/google/flexbox-layout/blob/main/LICENSE Apache v2.0
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
+
+    implementation 'androidx.emoji:emoji:1.1.0'
+    implementation 'androidx.emoji:emoji-bundled:1.1.0'
+
+    // https://github.com/coil-kt/coil/blob/main/LICENSE.txt Apache v2.0
+    def coil_version = "2.1.0"
+    implementation("io.coil-kt:coil:$coil_version")
+    implementation("io.coil-kt:coil-gif:$coil_version")
+    implementation("io.coil-kt:coil-svg:$coil_version")
+    implementation("io.coil-kt:coil-video:$coil_version")
+
+    // https://github.com/Baseflow/PhotoView/blob/master/LICENSE Apache v2.0
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
+    implementation platform('com.google.firebase:firebase-bom:31.0.0')
+    implementation 'com.google.firebase:firebase-crashlytics-ndk'
+
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-analytics'
+
+    implementation 'org.linphone:linphone-sdk-android:5.2.0'
+
+    // Only enable leak canary prior to release
+    // debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
+
+    // Nativetalk
+    implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
+
+    // allows retrofit return the json object as a string
+    implementation "com.squareup.retrofit2:converter-scalars:$version_retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$version_retrofit"
+    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
+
+    implementation "com.google.code.gson:gson:2.9.1"
+
+    implementation 'com.simplecityapps:recyclerview-fastscroll:2.0.1'
+
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-process:$lifecycle_version"
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                groupId = 'com.github.Tech4mation'
+                artifactId = 'nativetalk-call-sdk'
+                version = '1.0'
+            }
+        }
+    }
+}

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.google.android.flexbox.FlexDirection" />
+
+        <variable
+            name="controlsViewModel"
+            type="com.nativetalk.call.activities.voip.viewmodels.ControlsViewModel" />
+
+        <variable
+            name="callsViewModel"
+            type="com.nativetalk.call.activities.voip.viewmodels.CallsViewModel" />
+
+
+    </data>
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primary_color">
+
+        <RelativeLayout
+            android:id="@+id/constraint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white_color">
+
+            <RelativeLayout
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/green_bg_styled2"
+                android:paddingLeft="30dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white_color"
+                        android:text="@{callsViewModel.title}"
+                        />
+                    <Chronometer
+                        android:id="@+id/active_call_timer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white_color" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/header">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="20dp">
+
+                    <LinearLayout
+                        android:id="@id/content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="10dp">
+
+                        <TextView
+                            android:id="@+id/avatar"
+                            android:layout_width="52dp"
+                            android:layout_height="52dp"
+                            android:background="@drawable/fade_green"
+                            android:gravity="center"
+                            android:text="@{callsViewModel.customerInitials}"
+                            android:textSize="@dimen/header_texts_size"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/remote_name"
+                            style="@style/nativetalk_call_header_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:text="@{callsViewModel.currentCallData.contact.name ?? callsViewModel.currentCallData.displayName, default=`Bilbo Baggins`}"
+                            android:textColor="@color/black_color"
+                            android:textSize="@dimen/header_texts_size"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.141"
+                            app:layout_constraintStart_toEndOf="@id/avatar"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </LinearLayout>
+
+                    <include
+                        android:id="@+id/primary_buttons"
+                        layout="@layout/voip_buttons"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="10dp"
+                        android:visibility="@{controlsViewModel.fullScreenMode || controlsViewModel.pipMode ? View.GONE : View.VISIBLE}"
+                        app:callsViewModel="@{callsViewModel}"
+                        app:controlsViewModel="@{controlsViewModel}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.658"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/remote_name"
+                        app:layout_constraintVertical_bias="0.004" />
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/popup_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/voip_translucent_popup_background"
+            android:onClick="@{() -> controlsViewModel.hideExtraButtons(false)}"
+            android:visibility="@{controlsViewModel.showExtras ? View.VISIBLE : View.GONE, default=gone}" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>
+
+    <!--                    android:text="@{callsViewModel.comment}"-->

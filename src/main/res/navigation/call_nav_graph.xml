@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/call_nav_graph"
+    app:startDestination="@id/singleCallFragment">
+
+        <fragment
+            android:id="@+id/singleCallFragment"
+            android:name="com.nativetalk.call.activities.voip.fragments.SingleCallFragment"
+            android:label="SingleCallFragment"
+            tools:layout="@layout/voip_single_call_fragment">
+        </fragment>
+
+        <action
+            android:id="@+id/action_global_singleCallFragment"
+            app:destination="@id/singleCallFragment" />
+
+        <fragment
+            android:id="@+id/outgoingCallFragment"
+            android:name="com.nativetalk.call.activities.voip.fragments.OutgoingCallFragment"
+            android:label="OutgoingCallFragment"
+            tools:layout="@layout/voip_call_outgoing_fragment" />
+
+        <action
+            android:id="@+id/action_global_outgoingCallFragment"
+            app:destination="@id/outgoingCallFragment" />
+
+        <fragment
+            android:id="@+id/incomingCallFragment"
+            android:name="com.nativetalk.call.activities.voip.fragments.IncomingCallFragment"
+            android:label="IncomingCallFragment"
+            tools:layout="@layout/voip_call_incoming_fragment" />
+
+        <action
+            android:id="@+id/action_global_incomingCallFragment"
+            app:destination="@id/incomingCallFragment" />
+</navigation>
